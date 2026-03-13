@@ -144,37 +144,6 @@ static void ndllexample_sample_method_void (value inputValue) {
 DEFINE_PRIME1v (ndllexample_sample_method_void);
 */
 
-static void ndllexample_update_audio_visualizer(value samples,
-                                                value audioMembers,
-                                                double scaleMultiplier,
-                                                int halfLength) {
-  const int audioLength = val_array_size(audioMembers);
-  const int audioLengths = audioLength - 1;
-
-  static const int scale_y_id = val_id("y");
-  static const int scale_id = val_id("scale");
-  static const int set_alpha_id = val_id("set_alpha");
-
-  for (int i = 0; i < halfLength; i++) {
-    const double sample = val_float(val_array_i(samples, i));
-    const double scaleValue = sample * scaleMultiplier;
-
-    const value sprite = val_array_i(audioMembers, i);
-    const value sprite_2 = val_array_i(audioMembers, audioLengths - i);
-
-    const value scale1 = val_field(sprite, scale_id);
-    const value scale2 = val_field(sprite_2, scale_id);
-
-    alloc_field_numeric(scale1, scale_y_id, scaleValue);
-    alloc_field_numeric(scale2, scale_y_id, scaleValue);
-
-    const value alphaArg = alloc_float(sample);
-    val_call1(val_field(sprite, set_alpha_id), alphaArg);
-    val_call1(val_field(sprite_2, set_alpha_id), alphaArg);
-  }
-}
-DEFINE_PRIME4v(ndllexample_update_audio_visualizer);
-
 extern "C" void ndllexample_main () {
 	
 	val_int(0); // Fix Neko init
