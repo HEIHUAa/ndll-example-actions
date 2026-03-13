@@ -1,5 +1,12 @@
 # Ndll Example
 
+> This repository is forked from [CodenameCrew/ndll-example](https://github.com/CodenameCrew/ndll-example).
+
+## Key Features
+
+- Automated cross-platform builds via GitHub Actions (Windows, Mac, Linux, iOS, Android)
+- Note: iOS and Android builds are currently untested and may not work
+
 ## Build instructions:
 
 First clone this repo
